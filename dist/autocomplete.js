@@ -60,7 +60,8 @@ var autocomplete = {
       });
       return;
     }
-    end(filterData(input.context, commands));
+    // FIXME: patched for more-then-one vorlap instance exist
+    end(filterData(input.context, undefined));
   },
 
   /**
@@ -158,6 +159,9 @@ function handleTabCounts(str, freezeTabs) {
  */
 
 function getMatch(ctx, data, options) {
+  // FIXME: patched for more-then-one vorlap instance exist
+  if (!ctx.length) { return undefined; }
+
   // Look for a command match, eliminating and then
   // re-introducing leading spaces.
   var len = ctx.length;
